@@ -1,25 +1,71 @@
 import React, { Component } from "react";
 import { Route, Router, Switch } from "react-router-dom";
-import StreamList from "../streams/StreamList";
-import StreamCreate from "../streams/StreamCreate";
-import StreamEdit from "../streams/StreamEdit";
-import StreamDelete from "../streams/StreamDelete";
-import StreamShow from "../streams/StreamShow";
 import Header from "./Header";
 import history from "../history";
+import Menu from "./Menu";
+import MapArea from "./MapArea";
+import StoreList from "./StoreList";
+import OrderList from "./OrderList";
 
 class App extends Component {
   render() {
     return (
       <Router history={history}>
         <Header />
-        <div className="ui container">
+        <div className="contents">
           <Switch>
-            <Route path="/" exact component={StreamList} />
-            <Route path="/streams/new" exact component={StreamCreate} />
-            <Route path="/streams/edit/:id" exact component={StreamEdit} />
-            <Route path="/streams/delete/:id" exact component={StreamDelete} />
-            <Route path="/streams/:id" exact component={StreamShow} />
+            <Route
+              path="/"
+              exact
+              render={() => (
+                <React.Fragment>
+                  <Menu />
+                  <MapArea />
+                </React.Fragment>
+              )}
+            />
+
+            <Route
+              path="/orderForm"
+              exact
+              render={() => (
+                <React.Fragment>
+                  <Menu />
+                  <MapArea display="orderform" />
+                </React.Fragment>
+              )}
+            />
+            <Route
+              path="/storeForm"
+              exact
+              render={() => (
+                <React.Fragment>
+                  <Menu />
+                  <MapArea display="storeForm" />
+                </React.Fragment>
+              )}
+            />
+            <Route
+              path="/storeList"
+              exact
+              render={() => (
+                <React.Fragment>
+                  <Menu />
+                  <StoreList />
+                </React.Fragment>
+              )}
+            />
+
+            <Route
+              path="/OrderList"
+              exact
+              render={() => (
+                <React.Fragment>
+                  <Menu />
+                  <OrderList />
+                </React.Fragment>
+              )}
+            />
           </Switch>
         </div>
       </Router>
